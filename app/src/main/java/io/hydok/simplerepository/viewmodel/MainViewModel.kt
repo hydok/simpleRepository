@@ -4,17 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.hydok.simplerepository.base.BaseViewModel
 import io.hydok.simplerepository.model.Cat
-import io.hydok.simplerepository.repository.Repository
+import io.hydok.simplerepository.repository.CatRepository
 
 
-class MainViewModel(private val repository: Repository) : BaseViewModel() {
+class MainViewModel(private val repository: CatRepository) : BaseViewModel() {
 
     val catsData: LiveData<List<Cat>> get() = _catsData
     private val _catsData = MutableLiveData<List<Cat>>()
 
     fun getCatsData() {
         launchViewModelScope {
-            repository.getCatsData()
+            _catsData.postValue(repository.getCatsData())
         }
     }
 }

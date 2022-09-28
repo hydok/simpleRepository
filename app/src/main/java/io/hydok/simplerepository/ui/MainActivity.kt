@@ -1,6 +1,8 @@
 package io.hydok.simplerepository.ui
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import io.hydok.simplerepository.R
 import io.hydok.simplerepository.base.BaseActivity
 import io.hydok.simplerepository.databinding.ActivityMainBinding
@@ -9,19 +11,28 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    val viewModel :MainViewModel = getViewModel()
+    private val viewModel: MainViewModel by lazy { getViewModel() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun initData() {
+        viewModel.getCatsData()
     }
 
     override fun setUI() {
     }
 
     override fun setObserver() {
+        viewModel.catsData.observe(this) {
+            it.forEach {
+                Log.d("TAG",it.url)
+            }
+        }
+        viewModel.fetchState.observe(this) {
+                Log.d("Fetch",it.name)
+        }
     }
 
     override fun setListener() {
