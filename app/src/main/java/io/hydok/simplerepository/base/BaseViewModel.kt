@@ -3,7 +3,10 @@ package io.hydok.simplerepository.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.net.SocketException
 import java.net.UnknownHostException
@@ -19,7 +22,7 @@ abstract class BaseViewModel : ViewModel() {
     val fetchState : LiveData<FetchState>
         get() = _fetchState
 
-    protected val exceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+    private val exceptionHandler = CoroutineExceptionHandler{ _, throwable ->
         throwable.printStackTrace()
 
         when(throwable){
@@ -29,6 +32,11 @@ abstract class BaseViewModel : ViewModel() {
             else -> _fetchState.postValue(FetchState.FAIL)
         }
     }
+
+    open fun launchViewModelScope(doWork: suspend () -> Unit) =
+        viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO + exceptionHandler) {
+            doWork()
+        }
 }
 
 enum class FetchState {
