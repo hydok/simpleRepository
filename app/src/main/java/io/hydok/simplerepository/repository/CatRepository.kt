@@ -2,6 +2,6 @@ package io.hydok.simplerepository.repository
 
 import io.hydok.simplerepository.model.Cat
 
-interface Repository {
+interface CatRepository {
    suspend fun getCatsData():List<Cat>
 }
