@@ -1,6 +1,7 @@
 package io.hydok.simplerepository
 
 import android.app.Application
+import io.hydok.simplerepository.di.dataSourceModule
 import io.hydok.simplerepository.di.networkModule
 import io.hydok.simplerepository.di.repositoryModule
 import io.hydok.simplerepository.di.viewModelModule
@@ -22,7 +23,8 @@ class MainApp : Application() {
                 listOf(
                     viewModelModule,
                     networkModule,
-                    repositoryModule
+                    repositoryModule,
+                    dataSourceModule
                 )
             )
         }
