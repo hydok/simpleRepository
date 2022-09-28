@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
@@ -26,11 +27,19 @@ val networkModule = module {
                 level = HttpLoggingInterceptor.Level.BODY
             })
             .addInterceptor {
-                val request: Request = it.request().newBuilder()
-                    .build()
+                val request: Request = it.request().newBuilder().build()
                 return@addInterceptor it.proceed(request)
             }.build()
     }
+
+    single {
+        Retrofit.Builder()
+            .baseUrl("https://api.thecatapi.com")
+            .addConverterFactory(GsonConverterFactory.create(get()))
+            .client(get())
+            .build()
+    }
+
 
     single { get<Retrofit>().create(ApiService::class.java) }
 }
