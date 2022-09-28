@@ -7,6 +7,4 @@ class CatRepositoryImpl(private val remoteDataSource: RemoteDataSource, val loca
 
 
     override suspend fun getCatsData() = remoteDataSource.getCatsData()
-
-
 }

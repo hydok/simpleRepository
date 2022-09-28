@@ -1,5 +1,6 @@
 package io.hydok.simplerepository.base
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +19,7 @@ import java.net.UnknownHostException
 * @since 2022/09/28 11:17 오전
 **/
 abstract class BaseViewModel : ViewModel() {
+
     private val _fetchState = MutableLiveData<FetchState>()
     val fetchState : LiveData<FetchState>
         get() = _fetchState
@@ -37,6 +39,13 @@ abstract class BaseViewModel : ViewModel() {
         viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO + exceptionHandler) {
             doWork()
         }
+
+    /*<enum name="visible" value="0" />
+    <enum name="invisible" value="1" />
+    <enum name="gone" value="2" />*/
+    open val isLoading = MutableLiveData(false)
+    open fun showLoading() = isLoading.postValue(true)
+    open fun hideLoading() = isLoading.postValue(false)
 }
 
 enum class FetchState {

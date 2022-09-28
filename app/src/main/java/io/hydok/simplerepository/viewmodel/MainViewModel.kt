@@ -14,7 +14,9 @@ class MainViewModel(private val repository: CatRepository) : BaseViewModel() {
 
     fun getCatsData() {
         launchViewModelScope {
+            showLoading()
             _catsData.postValue(repository.getCatsData())
+            hideLoading()
         }
     }
 }
