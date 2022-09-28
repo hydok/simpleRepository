@@ -1,6 +1,6 @@
 package io.hydok.simplerepository.data
 
-class RemoteDataSourceImpl(val apiService: ApiService): RemoteDataSource {
+class RemoteDataSourceImpl(private val apiService: ApiService): RemoteDataSource {
 
     override suspend fun getCatsData() = apiService.getBasicCats()
 

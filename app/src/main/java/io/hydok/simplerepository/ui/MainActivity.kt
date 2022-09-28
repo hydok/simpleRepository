@@ -27,11 +27,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun setObserver() {
         viewModel.catsData.observe(this) {
             it.forEach {
-                Log.d("TAG",it.url)
+                Log.d("Data", it.url)
             }
         }
         viewModel.fetchState.observe(this) {
-                Log.d("Fetch",it.name)
+                Log.d("Error Fetch", it.name)
         }
     }
 
