@@ -1,7 +1,8 @@
-package io.hydok.simplerepository
+package io.hydok.simplerepository.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import io.hydok.simplerepository.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
