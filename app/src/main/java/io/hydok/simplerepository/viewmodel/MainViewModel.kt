@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import io.hydok.simplerepository.base.BaseViewModel
 import io.hydok.simplerepository.model.Cat
 import io.hydok.simplerepository.repository.CatRepository
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 
 
 class MainViewModel(private val repository: CatRepository) : BaseViewModel() {
@@ -21,18 +18,25 @@ class MainViewModel(private val repository: CatRepository) : BaseViewModel() {
         launchViewModelScope {
 
             //basic
-           /* showLoading()
-            _catsData.postValue(repository.getCatsData())
-            hideLoading()*/
+            /* showLoading()
+             _catsData.postValue(repository.getCatsData())
+             hideLoading()*/
 
             //flow
             repository.getCatsDataFlow()
-                .onStart { Log.d("MainViewModel", "onStart") }
-                .onCompletion { Log.d("MainViewModel", "onComplete") }
-                .catch { Log.d("MainViewModel", "onCatch") }
-                .collect { _catsData.postValue(it) }
-
-
+                .onStart {
+                    Log.d("MainViewModel", "onStart")
+                    showLoading()
+                }
+                .onCompletion {
+                    Log.d("MainViewModel", "onComplete")
+                    hideLoading()
+                }
+                .catch { exception -> Log.d("MainViewModel", "onCatch $exception") }
+                .collect {
+                    Log.d("MainViewModel", it.toString())
+                    _catsData.postValue(it)
+                }
         }
     }
 }

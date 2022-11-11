@@ -8,5 +8,7 @@ class RemoteDataSourceImpl(private val apiService: ApiService) : RemoteDataSourc
 
     override suspend fun getCatsData(): List<Cat> = apiService.getBasicCats()
     override suspend fun getCatsDataFlow(): Flow<List<Cat>> =
-        flow { emit(apiService.getBasicCats()) }
+        flow {
+            emit(apiService.getBasicCats())
+        }
 }

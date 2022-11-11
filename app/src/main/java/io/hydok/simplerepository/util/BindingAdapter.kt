@@ -21,11 +21,17 @@ fun setImageViewUrl(view: ImageView, url: String) {
 fun setAdapter(view: RecyclerView, baseAdapter: RecyclerView.Adapter<*>) {
     view.adapter = baseAdapter
 }
+/*
 
-@BindingAdapter("bind:isGone")
-fun isGone(view: View, isGone: Boolean) {
-    view.isVisible = !isGone
+@BindingAdapter("bind:height")
+fun setHeight(view: View, height: Int) {
+    val lp = view.layoutParams
+    lp?.let {
+        lp.height = height
+        view.layoutParams = lp
+    }
 }
+*/
 
 
 
