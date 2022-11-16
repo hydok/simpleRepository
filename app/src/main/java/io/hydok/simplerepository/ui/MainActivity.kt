@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.hydok.simplerepository.R
 import io.hydok.simplerepository.base.BaseActivity
+import io.hydok.simplerepository.base.FetchState
 import io.hydok.simplerepository.databinding.ActivityMainBinding
 import io.hydok.simplerepository.viewmodel.MainViewModel
 import io.hydok.simplerepository.viewmodel.RecyclerAdapter
@@ -35,8 +36,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         viewModel.fetchState.observe(this)
         {
-            //Error!!!!
+            //Error!!
             Log.d("Error Fetch", it.name)
+        }
+
+        viewModel.fetchState.observe(this){
+            
         }
     }
 

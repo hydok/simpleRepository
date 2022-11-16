@@ -32,7 +32,9 @@ class MainViewModel(private val repository: CatRepository) : BaseViewModel() {
                     Log.d("MainViewModel", "onComplete")
                     hideLoading()
                 }
-                .catch { exception -> Log.d("MainViewModel", "onCatch $exception") }
+                .catch { exception ->
+                    Log.d("MainViewModel", "onCatch $exception")
+                }
                 .collect {
                     Log.d("MainViewModel", it.toString())
                     _catsData.postValue(it)

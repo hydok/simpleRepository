@@ -1,8 +1,8 @@
 package io.hydok.simplerepository.repository
 
+import android.util.Log
 import io.hydok.simplerepository.data.LocalDataSource
 import io.hydok.simplerepository.data.RemoteDataSource
-import io.hydok.simplerepository.model.Cat
 import kotlinx.coroutines.flow.*
 
 class CatRepositoryImpl(
@@ -21,8 +21,9 @@ class CatRepositoryImpl(
         .onEach {
             // TODO: Local Save
         }
-        .catch {
+        .catch { exception ->
             // TODO: Local data loaad
+            Log.d("Error?", exception.toString())
             //emit()
         }
 }
