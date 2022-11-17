@@ -20,7 +20,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.vm = viewModel
         viewModel.getCatsData()
     }
-
+    //test
     override fun setUI() {
         binding.recyclerview.apply {
             layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
