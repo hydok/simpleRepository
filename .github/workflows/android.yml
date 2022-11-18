@@ -40,6 +40,7 @@ jobs:
       with:
         slack_token: ${{ secrets.SLACK_TOKEN }}  
         initial_comment: 'APK File Upload'
+        channels: '개발'
         file_type: 'apk'
         file_name: 'app-debug.apk'
         file_path: './app/build/outputs/apk/debug/app-debug.apk' 
