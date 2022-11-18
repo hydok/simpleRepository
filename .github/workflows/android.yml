@@ -35,22 +35,26 @@ jobs:
         name: app
         path: app/build/outputs/apk/debug
         
+        
+    - name: Slack - Send Msg
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        fields: workflow,job,commit,repo,author,took,ref
+        author_name: Action Test
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: always()
+        
+        
     - name: Slack - Upload APK
       uses: MeilCli/slack-upload-file@v1.0.0
       with:
         slack_token: ${{ secrets.SLACK_TOKEN }}  
-        initial_comment: 'APK File Upload'
+        initial_comment: ''
         channels: '개발'
         file_type: 'apk'
         file_name: 'app-debug.apk'
         file_path: './app/build/outputs/apk/debug/app-debug.apk' 
         
- #   - name: Slack - Send Msg
- #     uses: 8398a7/action-slack@v3
- #     with:
- #       status: ${{ job.status }}
- #       fields: workflow,job,commit,repo,author,took,ref
- #       author_name: Heeg
- #     env:
- #       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
- #     if: always()
+
