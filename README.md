@@ -1,4 +1,4 @@
 # simpleRepository
-Repository Pattern
+Android Repository Pattern
 
 MVVM + Repository
