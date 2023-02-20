@@ -32,6 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun setObserver() {
         viewModel.catsData.observe(this) {
             recyclerAdapter.setDatas(it)
+
         }
 
         viewModel.fetchState.observe(this)
